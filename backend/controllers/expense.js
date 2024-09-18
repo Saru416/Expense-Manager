@@ -1,15 +1,7 @@
-const ExpenseSchema = require("../models/expeModel")
+import {Expense} from "../models/expeModel.js";
 
-exports.addExpense = async (req,res) => {
+export const addExpense = async (req,res) => {
     const {title,amount,category,description,date} = req.body
- 
-    const income = ExpenseSchema({
-        title,
-        amount,
-        category,
-        description,
-        date
-    })
 
     try {
         if(!title || !category || !description || !date){
@@ -18,31 +10,48 @@ exports.addExpense = async (req,res) => {
         if(amount<=0 || !amount === "number"){
             return res.status(400).json({message: "Amount must be a postive number"})
         }
-        await income.save()
-        res.status(200).json({message: "Expense Added"})
+
+        const expense = Expense({
+            user: req.user.id,
+            title,
+            amount,
+            category,
+            description,
+            date
+        });
+
+        await expense.save()
+        res.status(200).json({message: "Expense Added"});
     } catch (error) {
-        res.status(500).json({message: "Server Error"})
+        res.status(500).json({message: "Server Error"});
     }
-
-    console.log(income)
 }
 
-exports.getExpenses = async (req,res) => {
+export const getExpenses = async (req,res) => {
     try{
-        const incomes = await ExpenseSchema.find().sort({createdAt: -1})
-        res.status(200).json(incomes)
+        const expenses = await Expense.find({user: req.user.id }).sort({createdAt: -1})
+        res.status(200).json(expenses);
     } catch (error){
-        res.status(500).json({message: 'Server Error'})
+        res.status(500).json({message: 'Server Error'});
     }
 }
 
-exports.deleteExpense = async (req,res) => {
+export const deleteExpense = async (req,res) => {
     const {id} = req.params;
-    console.log(id)
+
     try {
-        const result = await ExpenseSchema.findByIdAndDelete(id);
-        res.status(200).json({message: "Delete Income" + result})
+        const expense = await Expense.findByIdAndDelete(id);
+
+        if (!expense) {
+            return res.status(404).jsoon({message: "Expense not Found!"});
+        }
+
+        if (expense.user.toString() !== req.user.id){
+            return res.status(401).json({message: "Not authorized to delete this expense"});
+        }
+        await expense.remove();
+        res.status(200).json({message: "Expense Delected"});
       } catch(err) {
-        res.status(500).json({message: err}) 
+        res.status(500).json({message: err.message}); 
       }
 }

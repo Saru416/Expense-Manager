@@ -1,6 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ExpenseSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     title: {
         type : String,
         required: true,
@@ -33,6 +38,6 @@ const ExpenseSchema = new mongoose.Schema({
         maxLength: 20,
         trim: true
     },
-},{timetamps: true})
+},{ timetamps: true })
 
-module.exports = mongoose.model('Expense', ExpenseSchema)
+export const Expense = mongoose.model('Expense', ExpenseSchema)

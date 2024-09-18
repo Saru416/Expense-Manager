@@ -1,23 +1,31 @@
-const express = require("express")
-const cors = require('cors');
-const {db} = require('./db/db')
+import express from "express";
+import cors from 'cors';
+import db from './db/db.js';
+import dotenv from 'dotenv';
+import userRoutes from './routes/userRoutes.js';
+import transactionRoutes from './routes/transactionRoutes.js'
+
+dotenv.config();
+
 const app = express()
-const {readdirSync} = require('fs')
 
-require("dotenv").config()
-
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 
 //middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust if you are using a different port or domain
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.get("/",(req,res) => {
     res.send('Hello World')
 })
 //routes
-readdirSync('./routes').map((route) => app.use('/api/v1',require('./routes/' + route)))
 
+app.use('/api/users', userRoutes);
+app.use('/api/users', transactionRoutes);
 
 const server = () =>{
     db()
@@ -26,4 +34,4 @@ const server = () =>{
     })
 }
 
-server()
+server();

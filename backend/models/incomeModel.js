@@ -1,6 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const IncomeSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     title: {
         type : String,
         required: true,
@@ -35,4 +40,4 @@ const IncomeSchema = new mongoose.Schema({
     },
 },{timetamps: true})
 
-module.exports = mongoose.model('Income', IncomeSchema)
+export const Income = mongoose.model('Income', IncomeSchema)

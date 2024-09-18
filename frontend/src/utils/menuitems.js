@@ -17,12 +17,12 @@ export const menuItems = [
         id: 3,
         title: 'Incomes',
         icon: trend,
-        link: '/dashboard',
+        link: '/income',
     },
     {
         id: 4,
         title: 'Expenses',
         icon: expenses,
-        link: '/dashboard',
+        link: '/expense',
     }
 ]

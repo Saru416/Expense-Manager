@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { useGlobalContext } from "../../context/globalContext";
 import Button from "../Button/Button";
-import {plus} from '../../utils/icons'
+import {plus} from '../../utils/icons';
+import { useDispatch } from "react-redux";
+import { addIncome } from "../../redux/slices/incomeSlice";
 
 function Form() {
-    const {addIncome, getIncomes} = useGlobalContext()
+    const dispatch = useDispatch();
 
     const [inputState, setInputState] = useState({
         title: '',
@@ -25,7 +26,7 @@ function Form() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        addIncome(inputState)
+        dispatch(addIncome(inputState));
         setInputState({
             title: '',
             amount: '',
@@ -141,4 +142,4 @@ const FormStyled = styled.form`
     }
 `;
 
-export default Form
+export default Form;

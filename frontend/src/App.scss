@@ -1,0 +1,554 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primaryColor: hsl(94, 55%, 56%);
+  --hoverColor: hsl(93, 75%, 76%);
+  --paleGreen: hsl(96, 75%, 89%);
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(0, 0%, 18%);
+  --greyText: hsl(0, 0%, 75%);
+  --bgColor: hsl(113, 11%, 85%);
+  --inputColor: hsl(330, 12%, 97%);
+
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 1.5rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: 0.938rem;
+  --smallFontSize: 0.813rem;
+  --smallestFontSize: 0.75rem;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+}
+
+.grid{
+    display: grid;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+html{
+    font-size: 90%;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.icon{
+    font-size: var(--h2FontSize);
+    cursor: pointer;
+}
+
+img, video{
+    height: auto;
+    width: 100%;
+}
+
+.message{
+    display: none;
+}
+
+.showMessage{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
+    background: var(--primaryColor);
+    color: var(--whiteColor);
+    border-radius: 3px;
+    text-align: center;
+
+    .profile{
+        width: 50px;
+        border: 0;
+        background: var(--primaryColor);
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    button:hover{
+        color: var(--primaryColor);
+        background: var(--paleGreen);
+    }
+}
+
+.btn{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: .8rem 1rem;
+    color: var(--greyText)
+}
+
+.btn .icon{
+    margin-left: .5rem;
+}
+
+.btn:hover{
+    color: var(--primaryColor);
+    background: var(--paleGreen);
+}
+
+//pages stylings
+
+.loginPage, .registerPage{
+    background-color: #f9f9f9;
+    z-index: 10;
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 7px 50px rgb(214, 223, 213);
+
+    .container{
+        height: 75vh;
+        width: 60%;
+        margin: auto;
+        justify-content: space-between;
+        border-radius: 10px;
+        background: hsl(0,0%,91%);
+
+        .videoDiv{
+            position: relative;
+            display: flex;
+            flex-basis: 50%;
+            width: 70%;
+            height: 100%;
+            padding: 0 1.5rem;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+
+            video, .footerDiv{
+                position: absolute;
+            }
+            video{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+            }
+
+            .textDiv{
+                position: relative;
+
+                .title{
+                    color: var(--whiteColor);
+                    font-size: 35px;
+                    font-weight: 800;
+                }
+
+                p{
+                    color: var(--whiteColor);
+                    padding: 1rem;
+                    font-weight: 400;
+                }
+            }
+
+            .footerDiv{
+                bottom: 10px;
+                padding: 0 1rem;
+                height: 60px;
+                background: rgba(255, 255, 255, .248);
+                left: 10px;
+                right: 10px;
+                justify-content: space-between;
+                backdrop-filter: blur(1px);
+                border-radius: 10px;
+
+                .text{
+                    color: var(--whiteColor);
+                }
+
+                .btn{
+                    background: var(--whiteColor);
+                    color: var(--primaryColor);
+                    padding: .8rem 1.5rem;
+                    border-radius: 10px;
+                    font-weight: 400;
+                    transition: .3s ease;
+
+                    &:hover{
+                        background: var(--hoverColor);
+                        color: var(--blackColor);
+                    }
+                }
+            }
+        }
+
+        .formDiv{
+            flex-basis: 50%;
+            margin: auto;
+            flex-direction: column;
+            gap: 1.5rem;
+            transform: translate(-1rem);
+
+            .headerDiv{
+                text-align: center;
+                padding: 1.5rem 0;
+
+                img{
+                    width: 60px;
+                    padding-bottom: .5rem;
+                }
+
+                h3{
+                    font-size: 25px;
+                    color: var(--blackColor);
+                    font-weight: 600;
+                }
+            }
+
+            .form{
+                gap: 1rem;
+
+                .inputDiv{
+                    .icon{
+                        color: var(--greyText);
+                    }
+
+                    input{
+                        background: none;
+                        outline: none;
+                        border: none;
+                        width: 200px;
+                    }
+
+                    label{
+                        color: var(--blackColor);
+                        font-weight: 400;
+                        font-size: 14px;
+                        padding: .5rem 0;
+                        display: block;
+                    }
+
+                    .input{
+                        gap: .5rem;
+                        padding: 1rem;
+                        background: var(--inputColor);
+                        border-radius: 10px;
+                    }
+                }
+
+                .btn{
+                    padding: .8rem;
+                    background: var(--primaryColor);
+                    border-radius: 10px;
+                    color: var(--whiteColor);
+                    align-items: center;
+                    margin: auto;
+                    justify-content: center;
+                    font-size: 16px;
+                    width: 100%;
+                    gap: .5rem;
+                    transition: .3s ease;
+
+                    .icon{
+                        font-size: 25px;
+                        transition: .3s ease;
+                    }
+
+                    &:hover{
+                        background: var(--hoverColor);
+                        color: var(--blackColor);
+                        
+                        .icon{
+                            color: var(--blackColor);
+                            transform: translateX(5px);
+                        }
+                    }
+                }
+
+                .forgetPassword{
+                    font-size: 13px;
+                    color: var(--blackColor);
+                    opacity: .7;
+                    text-align: center;
+
+                    a{
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 602px){
+    .loginPage, .registerPage{
+        .container{
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            padding: 1.5rem;
+
+            .videoDiv{
+                width: 100%;
+                .textDiv{
+                    .title{
+                        font-size: 20px;
+                    }
+
+                    p{
+                        padding: 1rem;
+                    }
+                }
+
+                .footerDiv{
+                    .text{
+                        font-size: 12px;
+                    }
+
+                    .btn{
+                        padding: .4rem 1.5rem;
+                    }
+                }
+            }
+
+            .formDiv{
+                gap: 1rem;
+                transform: translateY(-.5rem);
+
+                .headerDiv{
+                    padding: 1rem 0;
+
+                    img{
+                        width: 40px;
+                    }
+
+                    h3{
+                        font-size: 20px;
+                    }
+                }
+
+                .form{
+                    gap: .5rem;
+
+                    .inputDiv{
+                        input{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 670px){
+    .loginPage, .registerPage{
+        .container{
+            .videoDiv{
+                .textDiv{
+                    .title{
+                        font-size: 25px;
+                    }
+
+                    p{
+                        padding: 1rem;
+                    }
+                }
+
+                .footerDiv{
+                    .text{
+                        font-size: 12px;
+                    }
+
+                    .btn{
+                        padding: .8rem 1.5rem;
+                    }
+                }
+            }
+
+            .formDiv{
+
+                .headerDiv{
+                    padding: 1.5rem 0;
+
+
+
+                    h3{
+                        font-size: 20px;
+                    }
+                }
+
+                .form{
+                    .inputDiv{
+                        input{
+                            width: 100%;
+                            max-width: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 927px){
+    .loginPage, .registerPage{
+        .container{
+            width: 85%;
+        }
+    }
+}
+
+//dashboard
+
+.header{
+    width: 100%;
+    background-color: #252525;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+
+    a{
+        padding-right: 30px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    h1{
+        padding-left: 30px;
+    }
+}
+
+.main{
+    background-color: var(--bgColor);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding-left: 50px;
+
+    img{
+        height: 20px;
+        width: 20px;
+        margin-left: 120px;
+        margin-top: 100px;
+    }
+
+    h3{
+        padding-top: 30px;
+        font-size: 32px;
+    }
+
+    .endpoint{
+        margin-top: 50px;
+
+        button{
+            background-color: #fff;
+            width: 100px;
+            margin-left: 70px;
+            height: 50px;
+            font-size: medium;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+
+    .details{
+        background-color: white;
+        width: 55%;
+        margin-top: 10px;
+        overflow: hidden;        
+    }
+
+    .col{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .alert{
+        background-color: #f9f9f9;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .graph{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .details h4{
+        text-align: center;
+        font-size: 20px;
+        background-color: var(--bgColor);
+        padding-bottom: 20px;
+    }
+
+    .details table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      
+      .details th, .details td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+      }
+      
+      .details th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+      
+      .details tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      .details tr:hover {
+        background-color: #f1f1f1;
+      }
+      
+      .details td {
+        font-size: 14px;
+      }
+      
+      .details th {
+        font-size: 16px;
+      }
+
+      .resolve {
+        background-color: #fff;
+        border: none;
+        font-weight: 400;
+        color: #252525;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .resolve:hover{
+        background-color: green;
+      }
+      
+}
