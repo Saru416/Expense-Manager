@@ -35,7 +35,7 @@ export const getExpenses = async (req,res) => {
         const cacheExpenses = await redis.get('expense');
         if(cacheExpenses){
             console.log("Serving from Redis Cache");
-            return res.status(200).json(JSON.parse(cacheExpenses));
+            return res.status(200).json(cacheExpenses);
         }
         const expenses = await Expense.find({user: req.user.id }).sort({createdAt: -1})
 
