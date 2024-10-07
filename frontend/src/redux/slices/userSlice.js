@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = "https://expense-manager-63kw.onrender.com";
+const BASE_URL = "https://expense-manager-63kw.onrender.com/api/users";
 
 // Thunks for authentication
 export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, { rejectWithValue }) => {
