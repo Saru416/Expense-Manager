@@ -41,7 +41,7 @@ function Navigation({ active, setActive }) {
 
       <div className="bottom-nav">
         <li>
-          <button onClick={handlelogout}>{signout} Sign Out</button>
+          <button onClick={handlelogout}>{signout} SIGN OUT</button>
         </li>
       </div>
     </NavStyled>
@@ -121,6 +121,15 @@ const NavStyled = styled.nav`
       background: #222260;
       border-radius: 0 10px 10px 0;
     }
+  }
+
+  .bottom-nav{
+    button{
+      background: rgba(252, 246, 249, 0.78);      
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      }
   }
 `;
 

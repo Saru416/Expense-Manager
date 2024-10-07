@@ -9,18 +9,18 @@ dotenv.config();
 
 const app = express()
 
-const PORT = process.env.PORT || 5000;
+const PORT = 4000;
 
 //middlewares
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust if you are using a different port or domain
-    methods: ['GET', 'POST'],
+    origin: '*',
+    methods: ['GET', 'POST','DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.get("/",(req,res) => {
-    res.send('Hello World')
+    res.send('Hello World');
 })
 //routes
 

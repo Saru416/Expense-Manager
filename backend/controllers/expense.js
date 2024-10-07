@@ -1,4 +1,5 @@
 import {Expense} from "../models/expeModel.js";
+import redis from "../Service/redisClient.js";
 
 export const addExpense = async (req,res) => {
     const {title,amount,category,description,date} = req.body
@@ -21,6 +22,8 @@ export const addExpense = async (req,res) => {
         });
 
         await expense.save()
+
+        await redis.del('expenses');
         res.status(200).json({message: "Expense Added"});
     } catch (error) {
         res.status(500).json({message: "Server Error"});
@@ -29,7 +32,14 @@ export const addExpense = async (req,res) => {
 
 export const getExpenses = async (req,res) => {
     try{
+        const cacheExpenses = await redis.get('expense');
+        if(cacheExpenses){
+            console.log("Serving from Redis Cache");
+            return res.status(200).json(JSON.parse(cacheExpenses));
+        }
         const expenses = await Expense.find({user: req.user.id }).sort({createdAt: -1})
+
+        await redis.set('expenses',JSON.stringify(expenses), {ex: 3600})
         res.status(200).json(expenses);
     } catch (error){
         res.status(500).json({message: 'Server Error'});
@@ -50,6 +60,9 @@ export const deleteExpense = async (req,res) => {
             return res.status(401).json({message: "Not authorized to delete this expense"});
         }
         await expense.remove();
+
+        await redis.del('expenses');
+
         res.status(200).json({message: "Expense Delected"});
       } catch(err) {
         res.status(500).json({message: err.message}); 

@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5000/api/users";
+const BASE_URL = "http://localhost:4000/api/users";
 
 export const getIncomes = createAsyncThunk('income/getIncomes', async () => {
     const response = await axios.get(`${BASE_URL}/get-incomes`);

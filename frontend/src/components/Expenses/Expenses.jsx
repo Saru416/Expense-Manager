@@ -23,6 +23,11 @@ function Expenses(){
         }
     }, [isAuthenticated, dispatch, navigate])
 
+    const handleDeleteExp = (id) => {
+        console.log("Deleting exp with ID:", id);
+        dispatch(deleteExpense(id));
+    };
+
     return (
         <ExpensesStyled>
             <Innerlayout>
@@ -45,7 +50,7 @@ function Expenses(){
                                 type={type}
                                 category={category} 
                                 indicatorColor="var(--color-green)"
-                                deleteItem = {() => dispatch(deleteExpense(_id))}
+                                deleteItem = {() => handleDeleteExp(_id)}
                             />
                         })}
                     </div>

@@ -34,7 +34,7 @@ function Dashboard() {
     return (
         <DashboardStyled>
             <Innerlayout>
-                <h1>Welcome, {user?.name || "User"}</h1>
+                <h1>Welcome, {user?.username || "User"}</h1>
                 <h2>All Transactions</h2>
                 <div className="stats-con">
                     <div className="chart-con">

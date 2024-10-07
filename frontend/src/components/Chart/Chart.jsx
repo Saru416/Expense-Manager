@@ -1,5 +1,5 @@
-import React from 'react'
-import {Chart as ChartJs, 
+import React from 'react';
+import { Chart as ChartJs, 
     CategoryScale,
     LinearScale,
     PointElement,
@@ -8,13 +8,12 @@ import {Chart as ChartJs,
     Tooltip,
     Legend,
     ArcElement,
-} from 'chart.js'
+} from 'chart.js';
 
-import {Line} from 'react-chartjs-2'
-import styled from 'styled-components'
+import { Line } from 'react-chartjs-2';
+import styled from 'styled-components';
 import { dateFormat } from '../../utils/dateFormat';
 import { useSelector } from 'react-redux';
-
 
 ChartJs.register(
     CategoryScale,
@@ -25,10 +24,10 @@ ChartJs.register(
     Tooltip,
     Legend,
     ArcElement,
-)
+);
 
 function Chart() {
-    const { incomes, expenses} = useSelector((state) => ({
+    const { incomes, expenses } = useSelector((state) => ({
         incomes: state.incomes.incomes || [], // Access incomes from Redux store
         expenses: state.expenses.expenses || [] // Access expenses from Redux store
     }));
@@ -37,43 +36,44 @@ function Chart() {
         return <p>Loading data...</p>; // You can replace this with a loading spinner if needed
     }
 
+    // Sort incomes and expenses by date (ascending)
+    const sortedIncomes = [...incomes].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const sortedExpenses = [...expenses].sort((a, b) => new Date(a.date) - new Date(b.date));
+
     const data = {
-        labels: incomes.map((inc) =>{
-            const {date} = inc
-            return dateFormat(date)
+        labels: sortedIncomes.map((inc) => {
+            const { date } = inc;
+            return dateFormat(date); // Format the date
         }),
         datasets: [
             {
                 label: 'Income',
-                data: [
-                    incomes.map((income) => {
-                        const {amount} = income
-                        return amount
-                    })
-                ],
-                backgroundColor: 'green',
-                tension: .2
+                data: sortedIncomes.map((income) => {
+                    const { amount } = income;
+                    return amount; // Corrected data array for incomes
+                }),
+                backgroundColor: 'rgba(0, 255, 0, 0.2)', // Add transparency to the color
+                borderColor: 'green',
+                tension: 0.2
             },
             {
                 label: 'Expenses',
-                data: [
-                    expenses.map((expense) => {
-                        const {amount} = expense
-                        return amount
-                    })
-                ],
-                backgroundColor: 'red',
-                tension: .2
+                data: sortedExpenses.map((expense) => {
+                    const { amount } = expense;
+                    return amount; // Corrected data array for expenses
+                }),
+                backgroundColor: 'rgba(255, 0, 0, 0.2)', // Add transparency to the color
+                borderColor: 'red',
+                tension: 0.2
             }
         ]
-    }
-
+    };
 
     return (
-        <ChartStyled >
+        <ChartStyled>
             <Line data={data} />
         </ChartStyled>
-    )
+    );
 }
 
 const ChartStyled = styled.div`

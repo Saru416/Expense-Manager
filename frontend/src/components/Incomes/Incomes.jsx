@@ -17,6 +17,7 @@ function Income(){
     }, [dispatch]);
 
     const handleDeleteIncome = (id) => {
+        console.log("Deleting income with ID:", id);
         dispatch(deleteIncome(id));
     };
 
