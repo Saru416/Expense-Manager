@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = "https://expense-manager-63kw.onrender.com";
+const BASE_URL = "https://expense-manager-63kw.onrender.com/api/transactions";
 
 // Async thunk to fetch transactions
 export const fetchTransactions = createAsyncThunk(
