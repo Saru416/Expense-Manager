@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import avatar from "../../img/avatar.png";
 import { menuItems } from "../../utils/menuitems";
 import { signout } from "../../utils/icons";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navigation({ active, setActive }) {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   const handlelogout = () => {
     navigate("/login");
@@ -17,8 +19,8 @@ function Navigation({ active, setActive }) {
       <div className="user-con">
         <img src={avatar} alt="" />
         <div className="text">
-          <h2>Mike</h2>
-          <p>Your Money</p>
+          <h2>{user.name || "Mike"}</h2>
+          <p>Hello!!</p>
         </div>
       </div>
       <ul className="menu-items">

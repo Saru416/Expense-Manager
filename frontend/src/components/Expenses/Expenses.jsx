@@ -32,7 +32,7 @@ function Expenses(){
         <ExpensesStyled>
             <Innerlayout>
                 <h1>Expenses</h1>
-                <h2 className="total-income">Total Expense: <span>${totalExpenses}</span></h2>
+                <h2 className="total-income">Total Expense: <span>₹{totalExpenses}</span></h2>
                 <div className="income-content">
                     <div className="form-container">
                         <ExpensesForm/>
@@ -78,7 +78,7 @@ const ExpensesStyled = styled.div`
         span{
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--color-green);
+            color: red;
         }
     }
     .income-content{
