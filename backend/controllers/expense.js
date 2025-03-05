@@ -23,7 +23,7 @@ export const addExpense = async (req,res) => {
 
         await expense.save()
 
-        await redis.del('expenses');
+        // await redis.del('expenses');
         res.status(200).json({message: "Expense Added"});
     } catch (error) {
         res.status(500).json({message: "Server Error"});
@@ -32,14 +32,14 @@ export const addExpense = async (req,res) => {
 
 export const getExpenses = async (req,res) => {
     try{
-        const cacheExpenses = await redis.get('expense');
-        if(cacheExpenses){
-            console.log("Serving from Redis Cache");
-            return res.status(200).json(cacheExpenses);
-        }
+        // const cacheExpenses = await redis.get('expense');
+        // if(cacheExpenses){
+        //     console.log("Serving from Redis Cache");
+        //     return res.status(200).json(cacheExpenses);
+        // }
         const expenses = await Expense.find({user: req.user.id }).sort({createdAt: -1})
 
-        await redis.set('expenses',JSON.stringify(expenses), {ex: 3600})
+        // await redis.set('expenses',JSON.stringify(expenses), {ex: 3600})
         res.status(200).json(expenses);
     } catch (error){
         res.status(500).json({message: 'Server Error'});
@@ -59,9 +59,9 @@ export const deleteExpense = async (req,res) => {
         if (expense.user.toString() !== req.user.id){
             return res.status(401).json({message: "Not authorized to delete this expense"});
         }
-        await expense.remove();
+        // await expense.remove();
 
-        await redis.del('expenses');
+        // await redis.del('expenses');
 
         res.status(200).json({message: "Expense Delected"});
       } catch(err) {

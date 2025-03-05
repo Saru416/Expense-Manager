@@ -23,7 +23,7 @@ export const addIncome = async (req,res) => {
 
         await income.save()
 
-        await redis.del('incomes');
+        // await redis.del('incomes');
 
         res.status(200).json({message: "Income Added",income})
     } catch (error) {
@@ -33,15 +33,15 @@ export const addIncome = async (req,res) => {
 
 export const getIncome = async (req,res) => {
     try{
-        const cacheIncomes = await redis.get('incomes');
-        if(cacheIncomes){
-            console.log("Serving from Redis Cache");
-            return res.status(200).json(cacheIncomes);
-        }
+        // const cacheIncomes = await redis.get('incomes');
+        // if(cacheIncomes){
+        //     console.log("Serving from Redis Cache");
+        //     return res.status(200).json(cacheIncomes);
+        // }
 
         const incomes = await Income.find({user: req.user.id}).sort({createdAt: -1})
         
-        await redis.set('incomes',JSON.stringify(incomes), {ex: 3600})
+        // await redis.set('incomes',JSON.stringify(incomes), {ex: 3600})
         
         res.status(200).json(incomes);
     } catch (error){
@@ -65,7 +65,7 @@ export const deleteIncome = async (req,res) => {
 
         await Income.findByIdAndDelete(id);
 
-        await redis.del('incomes');
+        // await redis.del('incomes');
         
         res.status(200).json({ message: "Income Deleted" });
     } catch (error) {

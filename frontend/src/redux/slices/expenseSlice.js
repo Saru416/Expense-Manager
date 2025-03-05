@@ -3,7 +3,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = "https://expense-manager-63kw.onrender.com/api/users";
+//const BASE_URL = "https://expense-manager-63kw.onrender.com";
+const BASE_URL = "http://localhost:4000/api/users";
 
 export const getExpenses = createAsyncThunk('expense/getExpenses', async () => {
     const response = await axios.get(`${BASE_URL}/get-expenses`);
